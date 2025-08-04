@@ -11,9 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.jesil.hiitworkoutapp.presentation.navigation.Screens
-import com.jesil.hiitworkoutapp.presentation.on_boarding.OnBoardingScreen
-import com.jesil.hiitworkoutapp.presentation.theme.HIITWorkoutAppTheme
+import com.jesil.hiitworkoutapp.features.signup.presentation.SignUpScreen
+import com.jesil.hiitworkoutapp.core.navigation.Screens
+import com.jesil.hiitworkoutapp.core.on_boarding.OnBoardingScreen
+import com.jesil.hiitworkoutapp.core.theme.HIITWorkoutAppTheme
+import com.jesil.hiitworkoutapp.features.goals.presentation.GoalsScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +36,13 @@ class MainActivity : ComponentActivity() {
                         composable(Screens.OnboardingScreen.route){
                             OnBoardingScreen(navController = navController)
                         }
-                        composable(Screens.SignInScreen.route){
-
+                        composable(Screens.SignUpScreen.route){
+                            SignUpScreen(navController = navController)
                         }
+                        composable(Screens.GoalScreen.route){
+                            GoalsScreen(navController = navController)
+                        }
+
                     }
                 }
             }

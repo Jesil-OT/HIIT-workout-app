@@ -1,4 +1,4 @@
-package com.jesil.hiitworkoutapp.presentation.theme
+package com.jesil.hiitworkoutapp.core.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -9,3 +9,4 @@ val lime10 = Color(0xFFE8F2ED)
 val lime90 = Color(0xFF294033)
 val black = Color.Black
 val white = Color.White
+val darkGreen = Color(0xFF52946B)

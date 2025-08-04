@@ -1,4 +1,4 @@
-package com.jesil.hiitworkoutapp.presentation.theme
+package com.jesil.hiitworkoutapp.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

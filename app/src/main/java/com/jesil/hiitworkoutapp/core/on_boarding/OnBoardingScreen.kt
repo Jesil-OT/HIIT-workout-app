@@ -1,25 +1,17 @@
-package com.jesil.hiitworkoutapp.presentation.on_boarding
+package com.jesil.hiitworkoutapp.core.on_boarding
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,9 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.jesil.hiitworkoutapp.presentation.navigation.Screens
-import com.jesil.hiitworkoutapp.presentation.theme.HIITWorkoutAppTheme
-import com.jesil.hiitworkoutapp.presentation.theme.ThemeAnnotation
+import com.jesil.hiitworkoutapp.core.navigation.Screens
+import com.jesil.hiitworkoutapp.core.theme.HIITWorkoutAppTheme
+import com.jesil.hiitworkoutapp.core.theme.ThemeAnnotation
 
 @Composable
 fun OnBoardingScreen(
@@ -59,13 +51,13 @@ fun OnBoardingScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(48.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = Color.Black
             ),
             onClick = {
-                navController.navigate(Screens.SignInScreen.route){
+                navController.navigate(Screens.SignUpScreen.route){
                     popUpTo(Screens.OnboardingScreen.route){
                         inclusive = true
                     }

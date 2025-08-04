@@ -1,10 +1,10 @@
-package com.jesil.hiitworkoutapp.presentation.navigation
+package com.jesil.hiitworkoutapp.core.navigation
 
 import com.jesil.hiitworkoutapp.R
 
 sealed class Screens(val route: String, val title: String? = null, val icon: Int? = null) {
     object OnboardingScreen : Screens("onboarding_screen")
-    object SignInScreen : Screens("sign_in_screen")
+    object SignUpScreen : Screens("sign_up_screen")
     object GoalScreen : Screens("goal_screen")
     object CalorieScreen : Screens("calorie_screen")
     object HomeScreen : Screens("home_screen", "Home", R.drawable.home_icon)

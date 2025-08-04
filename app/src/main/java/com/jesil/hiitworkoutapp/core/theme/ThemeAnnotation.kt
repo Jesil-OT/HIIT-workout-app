@@ -1,4 +1,4 @@
-package com.jesil.hiitworkoutapp.presentation.theme
+package com.jesil.hiitworkoutapp.core.theme
 
 import android.content.res.Configuration
 import androidx.compose.ui.tooling.preview.Preview
