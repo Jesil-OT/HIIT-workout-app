@@ -10,3 +10,5 @@ val lime90 = Color(0xFF294033)
 val black = Color.Black
 val white = Color.White
 val darkGreen = Color(0xFF52946B)
+val limeGreen = Color(0xFFE7F1EC)
+val darkLimeGreen = Color(0xFF294033)
