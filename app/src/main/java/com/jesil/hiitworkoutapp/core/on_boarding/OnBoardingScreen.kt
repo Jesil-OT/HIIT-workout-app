@@ -1,5 +1,6 @@
 package com.jesil.hiitworkoutapp.core.on_boarding
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,7 +29,6 @@ fun OnBoardingScreen(
     modifier: Modifier = Modifier,
     navController: NavController
 ) {
-
     Column(
         modifier = modifier
             .background(MaterialTheme.colorScheme.background)
@@ -51,14 +51,16 @@ fun OnBoardingScreen(
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
-            modifier = Modifier.fillMaxWidth().height(48.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = Color.Black
             ),
             onClick = {
-                navController.navigate(Screens.SignUpScreen.route){
-                    popUpTo(Screens.OnboardingScreen.route){
+                navController.navigate(Screens.SignUpScreen.route) {
+                    popUpTo(Screens.OnboardingScreen.route) {
                         inclusive = true
                     }
                 }
@@ -73,6 +75,7 @@ fun OnBoardingScreen(
             )
         }
     }
+
 }
 
 @ThemeAnnotation

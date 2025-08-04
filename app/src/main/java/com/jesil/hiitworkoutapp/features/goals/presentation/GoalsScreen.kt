@@ -19,6 +19,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -128,7 +129,7 @@ fun GoalsScreen(
                         maxItemsInEachRow = 3,
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                         content = {
-                            goals.forEachIndexed {index, goal->
+                            goals.forEachIndexed { index, goal ->
                                 val isSelected = goal in selectedGoals
                                 GoalsChip(
                                     isSelected = isSelected,
@@ -147,16 +148,13 @@ fun GoalsScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(
+                        enabled = selectedGoals.isNotEmpty(),
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(48.dp)
                             .horizontalScroll(rememberScrollState()),
                         onClick = {
-                            navController.navigate(Screens.CalorieScreen.route) {
-                                popUpTo(Screens.GoalScreen.route) {
-                                    inclusive = true
-                                }
-                            }
+                            navController.navigate(Screens.CalorieScreen.route)
                         },
                         content = {
                             Text(
@@ -166,7 +164,11 @@ fun GoalsScreen(
                                     fontSize = 16.sp
                                 )
                             )
-                        }
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+                            disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f)
+                        )
                     )
                 }
             )
