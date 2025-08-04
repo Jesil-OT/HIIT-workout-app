@@ -1,0 +1,18 @@
+package com.jesil.hiitworkoutapp.presentation.theme
+
+import android.content.res.Configuration
+import androidx.compose.ui.tooling.preview.Preview
+
+
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    name = "Light Mode"
+)
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "Dark Mode"
+)
+
+annotation class ThemeAnnotation
