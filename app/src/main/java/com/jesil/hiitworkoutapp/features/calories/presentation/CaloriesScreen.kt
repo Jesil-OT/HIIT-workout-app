@@ -158,7 +158,11 @@ fun CaloriesScreen(
                     Button(
                         modifier = Modifier.fillMaxWidth().height(48.dp),
                         onClick = {
-                            navController.navigate(Screens.HomeScreen)
+                            navController.navigate(Screens.HomeScreen.route){
+                                popUpTo(Screens.GoalScreen.route){
+                                    inclusive = true
+                                }
+                            }
                         },
                         content = {
                             Text(
