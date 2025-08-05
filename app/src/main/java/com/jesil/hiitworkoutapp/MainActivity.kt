@@ -46,7 +46,9 @@ class MainActivity : ComponentActivity() {
                         composable(Screens.CalorieScreen.route) {
                             CaloriesScreen(navController = navController)
                         }
+                        composable(Screens.HomeScreen.route) {
 
+                        }
 
                     }
                 }

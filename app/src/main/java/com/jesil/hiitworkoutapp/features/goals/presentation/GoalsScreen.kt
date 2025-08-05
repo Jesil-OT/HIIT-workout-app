@@ -146,7 +146,7 @@ fun GoalsScreen(
                         }
                     )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
                     Button(
                         enabled = selectedGoals.isNotEmpty(),
                         modifier = Modifier
