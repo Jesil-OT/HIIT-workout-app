@@ -24,6 +24,7 @@ import com.jesil.hiitworkoutapp.core.navigation.Screens
 import com.jesil.hiitworkoutapp.core.on_boarding.OnBoardingScreen
 import com.jesil.hiitworkoutapp.core.theme.HIITWorkoutAppTheme
 import com.jesil.hiitworkoutapp.features.calories.presentation.CaloriesScreen
+import com.jesil.hiitworkoutapp.features.gender.presentation.GenderScreen
 import com.jesil.hiitworkoutapp.features.goals.presentation.GoalsScreen
 import com.jesil.hiitworkoutapp.features.home.presentation.HomeScreen
 
@@ -70,6 +71,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Screens.GoalScreen.route) {
                             GoalsScreen(navController = navController)
+                        }
+                        composable(Screens.GenderScreen.route) {
+                            GenderScreen(navController = navController)
                         }
                         composable(Screens.CalorieScreen.route) {
                             CaloriesScreen(navController = navController)

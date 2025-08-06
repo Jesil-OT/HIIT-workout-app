@@ -25,7 +25,6 @@ fun BottomNavigationBar(
     navController: NavController,
     isCurrentlySelected: (String) -> Boolean
 ) {
-    val navBackStackEntry = navController.currentBackStackEntryAsState()
     val items = listOf(
         BottomNavItem(
             name = Screens.HomeScreen.title ?: "",

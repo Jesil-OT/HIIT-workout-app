@@ -12,6 +12,7 @@ sealed class Screens(
     @Serializable object OnboardingScreen : Screens("onboarding_screen")
     @Serializable object SignUpScreen : Screens("sign_up_screen")
     @Serializable object GoalScreen : Screens("goal_screen")
+    @Serializable object GenderScreen : Screens("gender_screen")
     @Serializable object CalorieScreen : Screens("calorie_screen")
     @Serializable object HomeScreen : Screens("home_screen", "Home", R.drawable.home_icon)
     @Serializable object WorkoutScreen : Screens("workout_screen")

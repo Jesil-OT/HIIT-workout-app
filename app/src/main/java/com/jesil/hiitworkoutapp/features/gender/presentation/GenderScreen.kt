@@ -1,23 +1,19 @@
-package com.jesil.hiitworkoutapp.features.goals.presentation
+package com.jesil.hiitworkoutapp.features.gender.presentation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,13 +25,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -44,17 +39,14 @@ import com.jesil.hiitworkoutapp.core.navigation.Screens
 import com.jesil.hiitworkoutapp.core.theme.HIITWorkoutAppTheme
 import com.jesil.hiitworkoutapp.core.theme.ThemeAnnotation
 import com.jesil.hiitworkoutapp.core.theme.black
-import com.jesil.hiitworkoutapp.features.goals.data.goals
-import com.jesil.hiitworkoutapp.features.goals.presentation.components.GoalsChip
+import com.jesil.hiitworkoutapp.features.calories.data.genders
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GoalsScreen(
-    navController: NavController,
-    modifier: Modifier = Modifier
+fun GenderScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController
 ) {
-    var selectedGoals by remember { mutableStateOf(setOf<String>()) }
-
     Scaffold(
         modifier = modifier.background(MaterialTheme.colorScheme.background),
         topBar = {
@@ -66,7 +58,7 @@ fun GoalsScreen(
                         content = {
                             Text(
                                 modifier = Modifier.offset(x = (-24).dp),
-                                text = "Goals",
+                                text = "About you",
                                 style = MaterialTheme.typography.titleLarge.copy(
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 20.sp,
@@ -87,11 +79,11 @@ fun GoalsScreen(
                 navigationIcon = {
                     IconButton(
                         onClick = {
-                            selectedGoals = emptySet()
+                            navController.navigateUp()
                         },
                         content = {
                             Icon(
-                                imageVector = Icons.Default.Clear,
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = "Cancel"
                             )
                         }
@@ -103,61 +95,63 @@ fun GoalsScreen(
             Column(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .padding(vertical = 24.dp, horizontal = 16.dp),
+                    .padding(horizontal = 16.dp, vertical = 24.dp),
                 content = {
                     Text(
-                        text = "What are your goals?",
+                        text = "What's your gender?",
                         style = MaterialTheme.typography.titleLarge.copy(
                             color = MaterialTheme.colorScheme.onPrimary,
-                            fontSize = 28.sp,
                         )
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "We'll tailor your workouts to help you achieve your fitness aspirations.",
+                        text = "We need to know your gender so we can customize your 7-min workout. This helps us tailor workouts to your fitness goals.",
                         style = MaterialTheme.typography.labelSmall.copy(
                             color = MaterialTheme.colorScheme.onPrimary,
-                            fontSize = 16.sp,
+                            fontSize = 16.sp
                         )
                     )
-
-                    FlowRow(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(top = 16.dp)
-                            .verticalScroll(rememberScrollState()),
-                        maxItemsInEachRow = 3,
+                    var selectedGender = remember { mutableIntStateOf(-1) }
+                    Row(
+                        modifier = Modifier.padding(top = 24.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                         content = {
-                            goals.forEachIndexed { index, goal ->
-                                val isSelected = goal in selectedGoals
-                                GoalsChip(
-                                    isSelected = isSelected,
-                                    label = goal,
+                            genders.forEachIndexed { index, gender ->
+                                GenderItem(
+                                    modifier = Modifier.size(175.dp),
+                                    gender = gender.gender,
+                                    image = gender.image,
+                                    isSelected = selectedGender.intValue == index,
                                     onSelected = {
-                                        selectedGoals = if (isSelected) {
-                                            selectedGoals - goal
-                                        } else {
-                                            selectedGoals + goal
-                                        }
+                                        selectedGender.intValue = index
                                     }
                                 )
                             }
                         }
                     )
-
                     Spacer(modifier = Modifier.height(24.dp))
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = "I prefer not to say",
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            fontSize = 16.sp,
+                            textDecoration = TextDecoration.Underline
+                        ),
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
                     Button(
-                        enabled = selectedGoals.isNotEmpty(),
+                        enabled = selectedGender.value != -1,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(48.dp),
                         onClick = {
-                            navController.navigate(Screens.GenderScreen.route)
+                            navController.navigate(Screens.CalorieScreen.route)
                         },
                         content = {
                             Text(
-                                text = "Next",
+                                text = "Continue",
                                 style = MaterialTheme.typography.titleLarge.copy(
                                     color = black,
                                     fontSize = 16.sp
@@ -177,9 +171,9 @@ fun GoalsScreen(
 
 @ThemeAnnotation
 @Composable
-fun GoalScreenPreview() {
+fun GenderScreenPreview() {
     HIITWorkoutAppTheme {
-        GoalsScreen(
+        GenderScreen(
             modifier = Modifier.fillMaxSize(),
             navController = rememberNavController()
         )
