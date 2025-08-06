@@ -25,8 +25,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -111,20 +113,18 @@ fun GenderScreen(
                             fontSize = 16.sp
                         )
                     )
-                    var selectedGender = remember { mutableIntStateOf(-1) }
+                    var selectedGender by remember { mutableIntStateOf(-1) }
                     Row(
                         modifier = Modifier.padding(top = 24.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                         content = {
                             genders.forEachIndexed { index, gender ->
                                 GenderItem(
-                                    modifier = Modifier.size(175.dp),
+                                    modifier = Modifier.weight(1f).height(350.dp),
                                     gender = gender.gender,
                                     image = gender.image,
-                                    isSelected = selectedGender.intValue == index,
-                                    onSelected = {
-                                        selectedGender.intValue = index
-                                    }
+                                    isSelected = selectedGender == index,
+                                    onSelected = { selectedGender = index }
                                 )
                             }
                         }
@@ -142,7 +142,7 @@ fun GenderScreen(
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Button(
-                        enabled = selectedGender.value != -1,
+                        enabled = selectedGender != -1,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(48.dp),
